@@ -52,33 +52,25 @@ public class BasicGameApp extends GameApplication {
     protected void initInput() {
         FXGL.onKey(KeyCode.RIGHT, () -> {
             player.translateX(5); // move right 5 pixels
-            FXGL.inc(GAME_VAR_PIXELS_MOVED, 5);
         });
 
         FXGL.onKey(KeyCode.LEFT, () -> {
             player.translateX(-5); // move left 5 pixels
-            FXGL.inc(GAME_VAR_PIXELS_MOVED, 5);
         });
 
         FXGL.onKey(KeyCode.UP, () -> {
             player.translateY(-5); // move up 5 pixels
-            FXGL.inc(GAME_VAR_PIXELS_MOVED, 5);
         });
 
         FXGL.onKey(KeyCode.DOWN, () -> {
             player.translateY(5); // move down 5 pixels
-            FXGL.inc(GAME_VAR_PIXELS_MOVED, 5);
-        });
-
-        FXGL.onKeyDown(KeyCode.F, () -> {
-            FXGL.play("drop.wav");
         });
     }
 
     @Override
     protected void initUI() {
         Text textPixels = new Text();
-        textPixels.textProperty().bind(FXGL.getWorldProperties().intProperty(GAME_VAR_PIXELS_MOVED).asString());
+        textPixels.textProperty().bind(FXGL.getWorldProperties().intProperty(Variables.GAME_VAR_SCORE).asString());
         textPixels.setTranslateX(50); // x = 50
         textPixels.setTranslateY(100); // y = 100
 
@@ -93,7 +85,7 @@ public class BasicGameApp extends GameApplication {
 
     @Override
     protected void initGameVars(Map<String, Object> vars) {
-        vars.put(GAME_VAR_PIXELS_MOVED, 0);
+        vars.put(Variables.GAME_VAR_SCORE, 0);
     }
 
     @Override
