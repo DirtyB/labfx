@@ -19,13 +19,15 @@ import java.util.Map;
 public class BasicGameApp extends GameApplication {
 
     public static final String GAME_VAR_PIXELS_MOVED = "pixelsMoved";
+    public static final int SCREEN_WIDTH = 600;
+    public static final int SCREEN_HEIGHT = 600;
 
     private Entity player;
 
     @Override
     protected void initSettings(GameSettings settings) {
-        settings.setWidth(600);
-        settings.setHeight(600);
+        settings.setWidth(SCREEN_WIDTH);
+        settings.setHeight(SCREEN_HEIGHT);
         settings.setTitle("Porcelain Labyrinth");
         settings.setVersion("1.0-SNAPSHOT");
     }
@@ -40,12 +42,17 @@ public class BasicGameApp extends GameApplication {
                 .with(new CollidableComponent(true))
                 .buildAndAttach();
 
-        FXGL.entityBuilder()
-                .type(EntityType.COIN)
-                .at(500, 200)
-                .viewWithBBox(new Circle(15, 15, 15, Color.YELLOW))
-                .with(new CollidableComponent(true))
-                .buildAndAttach();
+        for (int i = 0; i < 10; i++) {
+            double x = Math.random() * SCREEN_WIDTH;
+            double y = Math.random() * SCREEN_HEIGHT;
+
+            FXGL.entityBuilder()
+                    .type(EntityType.COIN)
+                    .at(x, y)
+                    .viewWithBBox(new Circle(15, 15, 15, Color.YELLOW))
+                    .with(new CollidableComponent(true))
+                    .buildAndAttach();
+        }
     }
 
     @Override
