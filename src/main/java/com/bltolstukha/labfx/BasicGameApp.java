@@ -5,7 +5,6 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
-import com.almasb.fxgl.texture.Texture;
 import com.bltolstukha.labfx.collision.PlayerCoinCollisionHandler;
 import com.bltolstukha.labfx.entity.EntityType;
 import javafx.scene.input.KeyCode;
@@ -18,8 +17,7 @@ import java.util.Map;
 
 public class BasicGameApp extends GameApplication {
 
-    public static final String GAME_VAR_PIXELS_MOVED = "pixelsMoved";
-    public static final int SCREEN_WIDTH = 600;
+    public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 600;
 
     private Entity player;
@@ -78,16 +76,16 @@ public class BasicGameApp extends GameApplication {
     protected void initUI() {
         Text textPixels = new Text();
         textPixels.textProperty().bind(FXGL.getWorldProperties().intProperty(Variables.GAME_VAR_SCORE).asString());
-        textPixels.setTranslateX(50); // x = 50
-        textPixels.setTranslateY(100); // y = 100
+        textPixels.setTranslateX(10); // x = 50
+        textPixels.setTranslateY(30); // y = 100
 
         FXGL.getGameScene().addUINode(textPixels); // add to the scene graph
 
-        Texture brickTexture = FXGL.getAssetLoader().loadTexture("brick.png");
-        brickTexture.setTranslateX(50);
-        brickTexture.setTranslateY(450);
-
-        FXGL.getGameScene().addUINode(brickTexture);
+//        Texture brickTexture = FXGL.getAssetLoader().loadTexture("brick.png");
+//        brickTexture.setTranslateX(50);
+//        brickTexture.setTranslateY(450);
+//
+//        FXGL.getGameScene().addUINode(brickTexture);
     }
 
     @Override
