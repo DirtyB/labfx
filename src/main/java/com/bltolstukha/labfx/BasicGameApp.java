@@ -41,13 +41,14 @@ public class BasicGameApp extends GameApplication {
                 .buildAndAttach();
 
         for (int i = 0; i < 10; i++) {
-            double x = Math.random() * SCREEN_WIDTH;
-            double y = Math.random() * SCREEN_HEIGHT;
+            double x = Math.random() * (SCREEN_WIDTH-32);
+            double y = Math.random() * (SCREEN_HEIGHT-32);
 
             FXGL.entityBuilder()
                     .type(EntityType.COIN)
                     .at(x, y)
-                    .viewWithBBox(new Circle(15, 15, 15, Color.YELLOW))
+                    .scale(0.2, 0.2)
+                    .viewWithBBox("coin.png")
                     .with(new CollidableComponent(true))
                     .buildAndAttach();
         }

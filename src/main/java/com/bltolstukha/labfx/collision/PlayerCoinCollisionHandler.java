@@ -16,7 +16,7 @@ public class PlayerCoinCollisionHandler extends CollisionHandler {
     @Override
     protected void onCollisionBegin(Entity player, Entity coin) {
         FXGL.play("drop.wav");
-        FXGL.inc(Variables.GAME_VAR_SCORE, 1);
+        FXGL.inc(Variables.GAME_VAR_SCORE, 10);
         coin.removeFromWorld();
     }
 }
