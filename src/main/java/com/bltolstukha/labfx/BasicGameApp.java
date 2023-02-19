@@ -4,9 +4,8 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.texture.Texture;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.Map;
@@ -29,7 +28,7 @@ public class BasicGameApp extends GameApplication {
     protected void initGame() {
         player = FXGL.entityBuilder()
                 .at(300, 300)
-                .view(new Rectangle(25, 25, Color.GREEN))
+                .view("player.png")
                 .buildAndAttach();
     }
 
@@ -54,6 +53,10 @@ public class BasicGameApp extends GameApplication {
             player.translateY(5); // move down 5 pixels
             FXGL.inc(GAME_VAR_PIXELS_MOVED, 5);
         });
+
+        FXGL.onKeyDown(KeyCode.F, () -> {
+            FXGL.play("drop.wav");
+        });
     }
 
     @Override
@@ -64,6 +67,12 @@ public class BasicGameApp extends GameApplication {
         textPixels.setTranslateY(100); // y = 100
 
         FXGL.getGameScene().addUINode(textPixels); // add to the scene graph
+
+        Texture brickTexture = FXGL.getAssetLoader().loadTexture("brick.png");
+        brickTexture.setTranslateX(50);
+        brickTexture.setTranslateY(450);
+
+        FXGL.getGameScene().addUINode(brickTexture);
     }
 
     @Override
