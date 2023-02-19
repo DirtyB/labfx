@@ -28,6 +28,7 @@ public class BasicGameApp extends GameApplication {
     protected void initGame() {
         player = FXGL.entityBuilder()
                 .at(300, 300)
+                .scale(0.4, 0.4)
                 .view("player.png")
                 .buildAndAttach();
     }
