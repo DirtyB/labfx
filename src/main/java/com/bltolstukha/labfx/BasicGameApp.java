@@ -4,8 +4,13 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.texture.Texture;
+import com.bltolstukha.labfx.collision.PlayerCoinCollisionHandler;
+import com.bltolstukha.labfx.entity.EntityType;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.util.Map;
@@ -14,6 +19,7 @@ import java.util.Map;
 public class BasicGameApp extends GameApplication {
 
     public static final String GAME_VAR_PIXELS_MOVED = "pixelsMoved";
+
     private Entity player;
 
     @Override
@@ -27,9 +33,18 @@ public class BasicGameApp extends GameApplication {
     @Override
     protected void initGame() {
         player = FXGL.entityBuilder()
+                .type(EntityType.PLAYER)
                 .at(300, 300)
                 .scale(0.4, 0.4)
-                .view("player.png")
+                .viewWithBBox("player.png")
+                .with(new CollidableComponent(true))
+                .buildAndAttach();
+
+        FXGL.entityBuilder()
+                .type(EntityType.COIN)
+                .at(500, 200)
+                .viewWithBBox(new Circle(15, 15, 15, Color.YELLOW))
+                .with(new CollidableComponent(true))
                 .buildAndAttach();
     }
 
@@ -79,6 +94,11 @@ public class BasicGameApp extends GameApplication {
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put(GAME_VAR_PIXELS_MOVED, 0);
+    }
+
+    @Override
+    protected void initPhysics() {
+        FXGL.getPhysicsWorld().addCollisionHandler(new PlayerCoinCollisionHandler());
     }
 
     public static void main(String[] args) {
