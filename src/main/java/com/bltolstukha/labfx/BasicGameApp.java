@@ -8,10 +8,10 @@ import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.bltolstukha.labfx.collision.PlayerCoinCollisionHandler;
 import com.bltolstukha.labfx.entity.EntityType;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -21,6 +21,9 @@ public class BasicGameApp extends GameApplication {
     public static final int SCREEN_HEIGHT = 600;
 
     private Entity player;
+
+    private List<Entity> monsters = new ArrayList<>();
+
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -40,9 +43,17 @@ public class BasicGameApp extends GameApplication {
                 .with(new CollidableComponent(true))
                 .buildAndAttach();
 
+        monsters.add(FXGL.entityBuilder()
+                .type(EntityType.MONSTER)
+                .at(-200, -200)
+                .scale(0.3, 0.3)
+                .viewWithBBox("monster3.png")
+                .with(new CollidableComponent(true))
+                .buildAndAttach());
+
         for (int i = 0; i < 10; i++) {
-            double x = Math.random() * (SCREEN_WIDTH-32);
-            double y = Math.random() * (SCREEN_HEIGHT-32);
+            double x = Math.random() * SCREEN_WIDTH;
+            double y = Math.random() * SCREEN_HEIGHT;
 
             FXGL.entityBuilder()
                     .type(EntityType.COIN)
